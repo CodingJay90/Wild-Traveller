@@ -57,7 +57,8 @@ router.post('/login', async (req, res) => {
 router.get("/user", isLoggedIn, (req, res) => {
   User.findById(req.user.id)
     .select("-password")
-    .then((user) => res.json(user));
+    .then((user) => res.json(user))
+    .catch(err => console.log(err));
 });
 
 module.exports = router

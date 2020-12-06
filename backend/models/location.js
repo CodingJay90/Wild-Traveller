@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = require("./comment");
+const User = require("./user");
 
 const LocationSchema = new mongoose.Schema({
   location: {
@@ -15,13 +16,22 @@ const LocationSchema = new mongoose.Schema({
     required: true,
   },
   createdAt: {
-      type: Date,
-      default: Date.now()
+    type: Date,
+    default: Date.now(),
   },
-  comment: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Comment
-  }]
+  createdBy: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: User,
+    },
+    username: String,
+  },
+  comment: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Comment,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Location", LocationSchema);

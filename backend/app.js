@@ -21,6 +21,11 @@ const locationRoute = require('./routes/locationRoute')
 const commentRoute = require('./routes/commentRoute')
 const authRoute = require('./routes/authRoute')
 
+app.use(function (req, res, next) {
+  res.user = req.user
+  next();
+});
+
 app.use('/location', locationRoute)
 app.use('/location/:id/comment', commentRoute)
 app.use('/auth', authRoute)

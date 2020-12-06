@@ -7,14 +7,13 @@ const router = require("express").Router();
 router.get("/", (req, res) => {
   try {
     Location.find({}).populate("comment")
-      .then((foundLocation) => {
-        console.log(foundLocation);
+    .then((foundLocation) => {
         res.status(200).json(foundLocation);
       })
       .catch((err) =>
         res.status(400).json({ success: false, message: err.message })
       );
-  } catch (error) {
+    } catch (error) {
     res.json({ success: false, message: error.message });
     console.log(error);
   }
@@ -23,7 +22,17 @@ router.get("/", (req, res) => {
 //ADD A LOCATION TO DB
 router.post("/", isLoggedIn, (req, res) => {
   try {
-    Location.create(req.body)
+    const createdBy = {
+      id: req.user._id,
+      username: req.user.username,
+    };
+    console.log(createdBy, req.user._id)
+    const data = {
+      location,
+      image,
+      description,
+    } = req.body
+    Location.create(data, createdBy)
       .then((newLocation) => {
         console.log(newLocation);
         res.status(200).json(newLocation);
