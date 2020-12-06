@@ -1,0 +1,28 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+const app = express();
+app.use(express.json())
+// var corsOptions = {
+//     origin: 'http://localhost:5000',
+//     optionsSuccessStatus: 200, // For legacy browser support
+//     methods: "GET, PUT, POST, DELETE"
+// }
+
+app.use(cors());
+
+mongoose
+.connect("mongodb://localhost/wild_traveller_project_2")
+.then(() => console.log("Mongodb connected successfully"));
+
+//Import Routes
+const locationRoute = require('./routes/locationRoute')
+const commentRoute = require('./routes/commentRoute')
+const authRoute = require('./routes/authRoute')
+
+app.use('/location', locationRoute)
+app.use('/location/:id/comment', commentRoute)
+app.use('/auth', authRoute)
+
+app.listen(5000, () => console.log("server running on port 5000"));
