@@ -19,7 +19,7 @@ const LocationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  createdBy: {
+  author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: User,

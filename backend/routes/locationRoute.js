@@ -4,14 +4,15 @@ const Location = require("../models/Location");
 const router = require("express").Router();
 
 //GET ALL LOCATION FROM DB
-router.get("/", (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
   try {
+    console.log(req.user)
     Location.find({}).populate("comment")
     .then((foundLocation) => {
         res.status(200).json(foundLocation);
       })
       .catch((err) =>
-        res.status(400).json({ success: false, message: err.message })
+        res.status(400).json({ success: false, message: err.message})
       );
     } catch (error) {
     res.json({ success: false, message: error.message });
@@ -22,17 +23,19 @@ router.get("/", (req, res) => {
 //ADD A LOCATION TO DB
 router.post("/", isLoggedIn, (req, res) => {
   try {
-    const createdBy = {
-      id: req.user._id,
-      username: req.user.username,
+    const author = {
+      id: req.user.id,
+      username: req.user.username
     };
-    console.log(createdBy, req.user._id)
+    console.log(author, req.user._id)
+    console.log(req.user)
     const data = {
-      location,
-      image,
-      description,
-    } = req.body
-    Location.create(data, createdBy)
+      location: req.body.location,
+      image: req.body.image,
+      description: req.body.description,
+      author: author
+    }
+    Location.create(data)
       .then((newLocation) => {
         console.log(newLocation);
         res.status(200).json(newLocation);

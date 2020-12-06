@@ -8,7 +8,6 @@ const isLoggedIn = (req, res, next) => {
   try {
     const verified = jwt.verify(token, "secret key");
     req.user = verified;
-    console.log("This is the decoded token ot verified rather" + verified);
     console.log(verified)
     next();
     // res.status(200).json(verified)
@@ -18,5 +17,6 @@ const isLoggedIn = (req, res, next) => {
     console.log(err.message);
   }
 };
+
 
 module.exports = isLoggedIn;

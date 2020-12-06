@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
     });
-    const token = jwt.sign({ id: newUser._id }, "secret key");
+    const token = jwt.sign({ id: newUser._id, username: username }, "secret key");
     res.header("Authorization", token);
     res.status(200).json({success: true, user: newUser, token });
   } catch (err) {
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     if (!validatePassword) {
       return res.json({success: false, error: "Invalid Credentials. Password do not match" });
     }
-    const token = jwt.sign({ id: foundUser._id }, "secret key");
+    const token = jwt.sign({ id: foundUser._id, username: foundUser.username }, "secret key");
     res.status(200).json({success: true, token, user: foundUser})
     } catch (err) {
         console.log(err.message);
