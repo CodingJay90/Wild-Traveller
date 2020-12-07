@@ -4,7 +4,7 @@ const Location = require("../models/Location");
 const router = require("express").Router();
 
 //GET ALL LOCATION FROM DB
-router.get("/", isLoggedIn, (req, res) => {
+router.get("/", (req, res) => {
   try {
     console.log(req.user)
     Location.find({}).populate("comment")
