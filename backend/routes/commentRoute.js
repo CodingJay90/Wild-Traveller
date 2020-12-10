@@ -7,9 +7,10 @@ router.post("/create", async (req, res) => {
   try {
     const foundLocation = await Location.findById({ _id: req.params.id });
     const comment = await Comment.create(req.body);
+    console.log(req.body)
     await foundLocation.comment.push(comment);
     await foundLocation.save();
-    res.status(200).json({ success: true, foundLocation });
+    res.status(200).json({ success: true, comment });
   } catch (err) {
     res.status(400).json(err.message);
     console.log(err);
