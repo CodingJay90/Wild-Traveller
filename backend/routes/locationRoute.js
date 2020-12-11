@@ -52,7 +52,7 @@ router.post("/", isLoggedIn, (req, res) => {
 //GET A SPECIFIC LOACTION BY ID
 router.get("/:id", (req, res) => {
   try {
-    Location.findById(req.params.id)
+    Location.findById(req.params.id).populate("comment")
       .then((foundLoaction) => {
         console.log(foundLoaction);
         res.status(200).json(foundLoaction);
