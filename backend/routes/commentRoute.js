@@ -1,16 +1,24 @@
 const router = require("express").Router({ mergeParams: true });
+const isLoggedIn = require("../middleware/isLoggedIn");
 const Comment = require("../models/comment");
 const Location = require("../models/Location");
+const User = require("../models/user")
 
 //COMMENT CREATE
-router.post("/create", async (req, res) => {
+router.post("/create", isLoggedIn, async (req, res) => {
   try {
     const foundLocation = await Location.findById({ _id: req.params.id });
-    const comment = await Comment.create(req.body);
+    const comment = await (await Comment.create(req.body));
     console.log(req.body)
+    const user = await User.findById(req.user.id)
+    comment.author.id = user._id
+    comment.author.username = req.user.username
+    comment.avatar = user.avatar
+    await comment.save()
     await foundLocation.comment.push(comment);
     await foundLocation.save();
-    res.status(200).json({ success: true, comment });
+    console.log(comment)
+    res.status(200).json({ success: true, comment, user });
   } catch (err) {
     res.status(400).json(err.message);
     console.log(err);

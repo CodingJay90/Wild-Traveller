@@ -54,7 +54,7 @@ router.get("/:id", (req, res) => {
   try {
     Location.findById(req.params.id).populate("comment")
       .then((foundLoaction) => {
-        console.log(foundLoaction);
+        // console.log(foundLoaction);
         res.status(200).json(foundLoaction);
       })
       .catch((err) =>
