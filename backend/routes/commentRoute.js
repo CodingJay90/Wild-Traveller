@@ -4,6 +4,8 @@ const Comment = require("../models/comment");
 const Location = require("../models/Location");
 const User = require("../models/user")
 
+
+
 //COMMENT CREATE
 router.post("/create", isLoggedIn, async (req, res) => {
   try {
