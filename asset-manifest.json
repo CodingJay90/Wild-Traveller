@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/CodingJay90/Wild-Traveller/static/css/main.c272160f.chunk.css",
+    "main.js": "/CodingJay90/Wild-Traveller/static/js/main.0c15929d.chunk.js",
+    "main.js.map": "/CodingJay90/Wild-Traveller/static/js/main.0c15929d.chunk.js.map",
+    "runtime-main.js": "/CodingJay90/Wild-Traveller/static/js/runtime-main.10027e84.js",
+    "runtime-main.js.map": "/CodingJay90/Wild-Traveller/static/js/runtime-main.10027e84.js.map",
+    "static/js/2.601eebc7.chunk.js": "/CodingJay90/Wild-Traveller/static/js/2.601eebc7.chunk.js",
+    "static/js/2.601eebc7.chunk.js.map": "/CodingJay90/Wild-Traveller/static/js/2.601eebc7.chunk.js.map",
+    "index.html": "/CodingJay90/Wild-Traveller/index.html",
+    "static/css/main.c272160f.chunk.css.map": "/CodingJay90/Wild-Traveller/static/css/main.c272160f.chunk.css.map",
+    "static/js/2.601eebc7.chunk.js.LICENSE.txt": "/CodingJay90/Wild-Traveller/static/js/2.601eebc7.chunk.js.LICENSE.txt",
+    "static/media/img7.22b15aae.jpg": "/CodingJay90/Wild-Traveller/static/media/img7.22b15aae.jpg",
+    "static/media/video-1.59e75226.mp4": "/CodingJay90/Wild-Traveller/static/media/video-1.59e75226.mp4"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.10027e84.js",
+    "static/js/2.601eebc7.chunk.js",
+    "static/css/main.c272160f.chunk.css",
+    "static/js/main.0c15929d.chunk.js"
+  ]
+}
