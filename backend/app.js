@@ -1,19 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path')
 
 const app = express();
+const PORT = process.env.PORT || 5000
 app.use(express.json())
-// var corsOptions = {
-//     origin: 'http://localhost:5000',
-//     optionsSuccessStatus: 200, // For legacy browser support
-//     methods: "GET, PUT, POST, DELETE"
-// }
 
 app.use(cors());
 
 mongoose
-.connect("mongodb://localhost/wild_traveller_project_2")
+.connect(process.env.MONGODB_URI || "mongodb://localhost/wild_traveller_project_2")
 .then(() => console.log("Mongodb connected successfully"));
 
 //Import Routes
@@ -21,13 +18,16 @@ const locationRoute = require('./routes/locationRoute')
 const commentRoute = require('./routes/commentRoute')
 const authRoute = require('./routes/authRoute')
 
-app.use(function (req, res, next) {
-  res.user = req.user
-  next();
-});
-
 app.use('/location', locationRoute)
 app.use('/location/:id/comment', commentRoute)
 app.use('/auth', authRoute)
 
-app.listen(5000, () => console.log("server running on port 5000"));
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static( 'client/build' ))
+
+  app.get('*', () => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+  })
+}
+
+app.listen(PORT, () => console.log("server running on port " + PORT));
